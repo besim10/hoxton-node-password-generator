@@ -20,7 +20,7 @@ function getAllowedCharacters(): (string | number)[] {
   if (mustHaveUpperCaseLetters) allowedCharacters.push(...upperCaseLetters);
   if (mustHaveSpecialCharacters) allowedCharacters.push(...specialChars);
   if (mustHaveNumbers) allowedCharacters.push(...numbers);
-  // console.log(allowedCharacters)
+
   return allowedCharacters;
 }
 
@@ -56,9 +56,9 @@ function getMandatoryCharacters(): (string | number)[] {
 }
 
 // fill the rest of the password with whatever is allowed
-function getRandomCharacters(numberOfCharacters: number) {
+function getRandomCharacters(numberOfCharacters: number):(string | number)[] {
   const randomCharacters:(string |number)[] = [];
-  const allowedCharacters = getAllowedCharacters();
+  const allowedCharacters:(string | number)[] = getAllowedCharacters();
 
   for (let i = 1; i <= numberOfCharacters; i++) {
     const randomChar = getRandomItemFromArray(allowedCharacters);
@@ -68,22 +68,22 @@ function getRandomCharacters(numberOfCharacters: number) {
 }
 
 // randomize the order of items in the array
-function shuffleArray(array: (number | string)[]) {
+function shuffleArray(array: (number | string)[]): (string | number)[] {
   return array.sort(() => 0.5 - Math.random());
 }
 
 // generate the final result
-function generatePassword() {
-  const requiredCharacters = getMandatoryCharacters();
-  const remainingCharacters = getRandomCharacters(
+function generatePassword():void {
+  const requiredCharacters: (string | number)[] = getMandatoryCharacters();
+  const remainingCharacters: (string | number)[] = getRandomCharacters(
     passwordLength - requiredCharacters.length
   );
 
-  const generatedCharacters = [...requiredCharacters, ...remainingCharacters];
+  const generatedCharacters: (string | number)[] = [...requiredCharacters, ...remainingCharacters];
 
-  const shuffledChars = shuffleArray(generatedCharacters);
+  const shuffledChars: (string | number)[] = shuffleArray(generatedCharacters);
 
-  const password = shuffledChars.join("");
+  const password:string = shuffledChars.join("");
   if (!password.length) {
     console.log("Please set at least one condition to generate password");
   } else {
